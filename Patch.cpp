@@ -67,15 +67,13 @@ float Patch::get_LocBreedProd(int a, int b) {
 
 //initialize patch quality at t0 and calculate density-dependence factor
 void Patch::init_patch_qual(parameters para) {
-	std::normal_distribution<float> init_enviro_norm(0.0, para.SD0_enviro);
+	std::normal_distribution<float> init_enviro_norm(0.0, para.SD_enviro);
 
 	IDPatch = (para.NCOL*y) + x;
 
 	env_qual = init_enviro_norm(rdgenPatch);
-	if (env_qual < (-1.0)) { env_qual = (-0.9999999999999999); }
-	if (env_qual > 1.0) { env_qual = 1.0; }
-
-	K = para.K_baseline * (env_qual + 1.0);
+	
+	K = env_qual * para.K_baseline;
 
 }
 
@@ -92,26 +90,16 @@ void Patch::init_pop_onPatch(parameters para, int id) {
 }
 
 
-//recalculate environmental quality for a patch based on previous year
+//recalculate environmental quality and local carrying capacity for a patch based on previous year
 void Patch::enviro_quality(parameters para) {
 
-	if (para.enviro == 1) {
-		std::normal_distribution<float> enviro_norm(env_qual, para.SD1_enviro);
+		std::normal_distribution<float> enviro_norm(0.0, para.SD_enviro);
+		env_qual = env_qual * para.ac + enviro_norm(rdgenPatch) *sqrt(1.0 - (para.ac*para.ac));
 
-		env_qual = enviro_norm(rdgenPatch);
-	}
-
-	else { uniform_real_distribution<float> enviro_stochast(-1, 1);
-			env_qual = enviro_stochast(rdgenPatch);
-	}
-
-	if (env_qual < (-1.0)) { env_qual = (-0.9999999999999999); }
-	if (env_qual > 1.0) { env_qual = 1.0; }
-
-	K = para.K_baseline * (env_qual + 1.000000);
-	
+		K = para.K_baseline + para.K_baseline * env_qual;
+		if (K > para.K_max) { K = para.K_max; }
+		if (K < 0) {K = 0; }	
 }
-
 
 
 //Produce new individuals on the patch

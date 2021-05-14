@@ -62,11 +62,3 @@ void Age_and_Recruit(void);
 void Dispersal(void);
 void Settlement(void);
 void Reinitialisation(void);
-
-//Sorting of patches based on local productivity
-//bool CompProd(Patch &a, Patch &b) {
-//	return a.product > b.product;
-//}
-
-
-

@@ -45,7 +45,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	char* buffer = _getcwd(NULL, 0);
 	dir = buffer;
 	free(buffer);
-	dir = dir + "\\"; //Current directory path
+	dir = dir + "\\Outputs\\ProspEmigrEvol\\"; //Current directory path
 	dirout = dir;
 	clock_t tStart = clock();
 
@@ -140,7 +140,7 @@ void Initialise(void) {
 
 
 	string name_param = dirout + "Sc" + Int2Str(para.ScenNb) + "_Em_" + Int2Str(para.emigr) + "_Settl_" + Int2Str(para.settl) + "_Select_" + Int2Str(para.selection)  
-		+ "_Env_" + Float2Str(para.SD1_enviro) + "_Cost_" + Float2Str(para.prosp_cost) + "_Param.txt";
+		+ "_Env_" + Float2Str(para.ac) + "_Cost_" + Float2Str(para.prosp_cost) + "_Param.txt";
 	para.outpara(name_param);
 	
 	grid.clear();
@@ -478,7 +478,7 @@ void Reinitialisation(void) {
 //Write headers in population output file
 void outpop_header(void) {
 	std::string name_pop;
-	name_pop = dirout + "Sc" + Int2Str(para.ScenNb) + "_Em_" + Int2Str(para.emigr) + "_Settl_" + Int2Str(para.settl) + "_Select_" + Int2Str(para.selection)  + "_Env_" + Float2Str(para.SD1_enviro) + "_Cost_" + Float2Str(para.prosp_cost) + "_pop.txt";
+	name_pop = dirout + "Sc" + Int2Str(para.ScenNb) + "_Em_" + Int2Str(para.emigr) + "_Settl_" + Int2Str(para.settl) + "_Select_" + Int2Str(para.selection)  + "_Env_" + Float2Str(para.ac) + "_Cost_" + Float2Str(para.prosp_cost) + "_pop.txt";
 	outpop.open(name_pop.c_str());
 	outpop << "sim gen PatchID env.qual K succrate ExpOff Nadult Nimmat Nsuc Nfail Njuv NpreDisp NDisp Nstay Nimmigr Nadfinal Nimmatfin" << endl;
 }
@@ -486,7 +486,7 @@ void outpop_header(void) {
 //Write headers in individual output file
 void outind_header(void) {
 	std::string name_ind;
-	name_ind = dirout + "Sc" + Int2Str(para.ScenNb) + "_Em_" + Int2Str(para.emigr) + "_Settl_" + Int2Str(para.settl) + "_Select_" + Int2Str(para.selection)  + "_Env_" + Float2Str(para.SD1_enviro) + "_Cost_" + Float2Str(para.prosp_cost) + "_ind.txt";
+	name_ind = dirout + "Sc" + Int2Str(para.ScenNb) + "_Em_" + Int2Str(para.emigr) + "_Settl_" + Int2Str(para.settl) + "_Select_" + Int2Str(para.selection)  + "_Env_" + Float2Str(para.ac) + "_Cost_" + Float2Str(para.prosp_cost) + "_ind.txt";
 	outind.open(name_ind.c_str());
 	outind << "sim gen PatchID NewPatchID ID Age AgeRecruit BreedPerf Disp DispProba FailInterc SucInterc FailSlope SucSlope NbProspPatch" << endl;
 }

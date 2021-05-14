@@ -24,8 +24,8 @@ public:
 	int emigr;			//emigration scenario
 	int settl;			//settlement scenario	
 	int selection;		//patch selection process scenario	
-	int enviro;			//varaibility of the environment
 	int softmax;			//parameters for the softmax function	
+	bool cost;			//cost for prospecting or not
 
 
 	//Parameters for the grid
@@ -33,6 +33,10 @@ public:
 	int NCOL;					// Number of cells in y
 	int N_patches;				//Total number of patches
 	int max_prosp_patch;			//Max number of patches that can prospected
+
+	//Parameters for the stochastic but auto-correlated environment
+	float SD_enviro;		// SD of environmental quality
+	double ac;						//temporal auto-correlation coefficent
 
 
 	//////////////////////////
@@ -64,12 +68,9 @@ public:
 	//Carrying capacity
 	int N_init;				//Number of initial individuals on each cell
 	float K_baseline;		//Number of initial individuals on each cell
+	int K_max;				//Maxmimum number of individuals in a patch
 	int b;					//Density-dependence coefficient
-
-
-//Parameters for the stochastic but auto-correlated environment
-	float SD0_enviro;		// SD of environmental quality
-	float SD1_enviro;		// SD of environmental quality
+	
 
 ///////////////
 //OUTPUT files
