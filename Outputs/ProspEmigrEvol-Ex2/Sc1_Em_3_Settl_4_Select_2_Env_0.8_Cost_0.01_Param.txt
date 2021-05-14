@@ -1,0 +1,12 @@
+sim 10
+gen 20001
+NROW 5
+NCOL 5
+Initial K 100
+Enviro_init_SD 1
+Autocor 0.8
+Emigr 3
+Settl 4
+Selection 2
+Mutation rate 0.01
+Prospecting cost 0.01
